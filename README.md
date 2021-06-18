@@ -14,6 +14,6 @@ Primero crear el proyecto react con el siguiente comando, donde frontend es el n
 
 npx create-react-app frontend --use-npm
 
-Dependencias del frontend:
+Dependencias del frontend (aún ninguna):
 
 npm i react-bootstrap bootstrap axios jwt-decode @reduxjs/toolkit react-redux react-router-dom moment semantic-ui-react react-table react-meta-tags

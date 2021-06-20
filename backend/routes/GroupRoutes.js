@@ -42,7 +42,7 @@ router.post("/add", async (req, resp) => {
     });
     const group = await Group.findOne({
       where: {
-        description: req.body.description,
+        name: req.body.name,
       },
     });
     user.addGroup(group);

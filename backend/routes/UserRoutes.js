@@ -22,7 +22,8 @@ router.post("/register", async (req, resp) => {
         email: req.body.email,
       },
     });
-    if (userExist) return res.status(400).send("Este usuario ya existe");
+    console.log("1");
+    if (userExist) return resp.status(400).send("Este usuario ya existe");
     // Encriptar contraseña
     const salt = await bcrypt.genSalt(10);
     const hashPass = await bcrypt.hash(req.body.password, salt);
@@ -31,7 +32,11 @@ router.post("/register", async (req, resp) => {
       name: req.body.name,
       email: req.body.email,
       password: hashPass,
-      type: req.body.type
+      type: req.body.type,
+      carrera: req.body.carrera,
+      campus: req.body.campus,
+      sexo: req.body.sexo,
+      ingresoU: req.body.ingresoU
     });
     return resp.send(user);
   } catch (error) {

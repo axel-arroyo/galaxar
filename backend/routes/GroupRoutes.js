@@ -37,12 +37,12 @@ router.post("/add", async (req, resp) => {
   try {
     const user = await User.findOne({
       where: {
-        id: req.body.user,
+        email: req.body.email,
       },
     });
     const group = await Group.findOne({
       where: {
-        id: req.body.group,
+        description: req.body.description,
       },
     });
     user.addGroup(group);

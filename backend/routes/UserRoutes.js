@@ -25,7 +25,7 @@ router.post("/register", async (req, resp) => {
     if (userExist) return res.status(400).send("Este usuario ya existe");
     // Encriptar contraseña
     const salt = await bcrypt.genSalt(10);
-    const hashPass = await bcrypt.hash(req.body.pass, salt);
+    const hashPass = await bcrypt.hash(req.body.password, salt);
     // Crear usuario
     const user = await User.create({
       name: req.body.name,
@@ -48,11 +48,11 @@ router.post("/login", async (req, res) => {
       },
     });
     if (!user) {
-      return res.status(400).send("Usuario o contraseña equivocada");
+      return res.status(401).send("Usuario o contraseña equivocada");
     }
     const validPass = await bcrypt.compare(req.body.password, user.password);
     if (!validPass) {
-      return res.status(400).send("Usuario o contraseña equivocada");
+      return res.status(401).send("Usuario o contraseña equivocada");
     }
     const token = jwt.sign(
       { email: user.email, type: user.type, name: user.name },

@@ -10,3 +10,8 @@
 - Rutas para registro y login, con jwt.
 ### Changes
 - Cambio de campo "mail" de modelo User a "email".
+
+## [20-06-2021] Login Registro Grupos (beta)
+### Added
+- Login y registro Frontend (beta).
+- Creación de grupos (beta).

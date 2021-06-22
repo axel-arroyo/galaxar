@@ -45,7 +45,8 @@ router.post("/assign", async (req, resp) => {
     // Se asume que el rol y usuario existen
     const role = await Role.findOne({where: {name: req.body.role}});
     const user = await User.findOne({where: {email: req.body.email}});
-    user.addRole(role);
+    user.id_rol = role.id;
+    user.save();
     resp.send("success");
   } catch (error) {
     resp.status(400).send("Error al hacer una query a la base de datos");

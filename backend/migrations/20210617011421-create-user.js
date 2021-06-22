@@ -32,6 +32,14 @@ module.exports = {
       ingresoU: {
         type: Sequelize.STRING
       },
+      id_rol: {
+        type: Sequelize.INTEGER,
+        references: {
+          model: "Roles",
+          key: "id",
+          as: "id_rol"
+        }
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE

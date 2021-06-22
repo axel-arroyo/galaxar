@@ -12,15 +12,15 @@ module.exports = (sequelize, DataTypes) => {
       User.belongsToMany(models.Group, {
         through: "User_Group",
       });
-      User.belongsToMany(models.Role, {
-        through: "User_Role",
-      });
       User.belongsToMany(models.Machine, {
         through: "Capacity",
       });
       User.hasMany(models.Report, {
         foreignKey: "id_user",
       });
+      User.belongsTo(models.Role, {
+        foreignKey: "id_rol"
+      })
     }
   }
   User.init(
@@ -32,7 +32,8 @@ module.exports = (sequelize, DataTypes) => {
       carrera: DataTypes.STRING,
       campus: DataTypes.STRING,
       sexo: DataTypes.STRING,
-      ingresoU: DataTypes.STRING
+      ingresoU: DataTypes.STRING,
+      id_rol: DataTypes.INTEGER
     },
     {
       sequelize,

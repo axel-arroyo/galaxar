@@ -23,3 +23,10 @@
 ### Changes
 - Cambio de campo "description" de modelo Group a "name".
 - Agregado config de sequelize a .gitignore.
+
+## [22-06-2021] Roles v2
+### Changes
+- Tipo de relación entre User y Role cambiada de M:N a M:1
+- Modificada la ruta para asignar rol en RoleRoutes para estar acorde con el nuevo modelo.
+### Deleted
+- Eliminado modelo User_Role (ya no es necesario).

@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
-const { User } = require("../models");
+const { User, Role } = require("../models");
 
 // Obtener todos los usuarios
 router.get("/", async (req, resp) => {
@@ -22,8 +22,12 @@ router.post("/register", async (req, resp) => {
         email: req.body.email,
       },
     });
-    console.log("1");
     if (userExist) return resp.status(400).send("Este usuario ya existe");
+    const role = await Role.findOne({
+      where: {
+        name: req.body.role
+      }
+    });
     // Encriptar contraseña
     const salt = await bcrypt.genSalt(10);
     const hashPass = await bcrypt.hash(req.body.password, salt);
@@ -32,11 +36,11 @@ router.post("/register", async (req, resp) => {
       name: req.body.name,
       email: req.body.email,
       password: hashPass,
-      type: req.body.type,
       carrera: req.body.carrera,
       campus: req.body.campus,
       sexo: req.body.sexo,
-      ingresoU: req.body.ingresoU
+      ingresoU: req.body.ingresoU,
+      id_rol: role.id
     });
     return resp.send(user);
   } catch (error) {
@@ -51,16 +55,15 @@ router.post("/login", async (req, res) => {
       where: {
         email: req.body.email,
       },
+      include: Role
     });
     if (!user) {
       return res.status(401).send("Usuario o contraseña equivocada");
     }
     const validPass = await bcrypt.compare(req.body.password, user.password);
-    if (!validPass) {
-      return res.status(401).send("Usuario o contraseña equivocada");
-    }
+    if (!validPass) return res.status(401).send("Usuario o contraseña equivocada");
     const token = jwt.sign(
-      { email: user.email, type: user.type, name: user.name },
+      { email: user.email, role: user.Role.name,name: user.name },
       process.env.SECRET_TOKEN
     );
     return res

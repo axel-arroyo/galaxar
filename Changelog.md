@@ -30,3 +30,10 @@
 - Modificada la ruta para asignar rol en RoleRoutes para estar acorde con el nuevo modelo.
 ### Deleted
 - Eliminado modelo User_Role (ya no es necesario).
+
+## [22-06-2021] Users v2
+### Changes
+- Borrado el campo "Type" de la ruta registro y añadido el Rol.
+- Modificado el Registro y Login para funcionar correctamente con el cambio.
+### Deleted
+- Campo "Type" de modelo User (hacía referencia al rol, ahora corresponde a un modelo aparte).

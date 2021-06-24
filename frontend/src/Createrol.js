@@ -5,7 +5,7 @@ import { useHistory } from "react-router-dom";
 
 import {Form,Alert,Button} from "react-bootstrap";
 
-function CreateGroup(props) {
+function CreateRol(props) {
   const [name, setName] = useState("");
 
 
@@ -23,7 +23,7 @@ function CreateGroup(props) {
   const handleSubmit = (e) => {
     e.preventDefault();
     axios.
-    post("http://localhost:8000/group/", {
+    post("http://localhost:8000/role/create", {
       name: name,
     })
     .then((data) => {
@@ -37,7 +37,7 @@ function CreateGroup(props) {
   return (
     <div id="login-box">
       <div class="left">
-        <h1>Crear Grupo</h1>
+        <h1>Crear Rol</h1>
         <form onSubmit={handleSubmit}>
           {estado !== "" && (
             <Alert variant={estado === "Grupo registrado" ? "success" : "danger"}>
@@ -61,4 +61,4 @@ function CreateGroup(props) {
   );
 }
 
-export default CreateGroup;
+export default CreateRol;

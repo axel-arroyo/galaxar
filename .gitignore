@@ -8,3 +8,6 @@ jspm_packages/
 backend/config/
 backend/package-lock.json
 backend/package.json
+frontend/package-lock.json
+frontend/package.json
+frontend/README.md

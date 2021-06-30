@@ -23,6 +23,8 @@ module.exports = {
           key: "id",
           as: "GroupId",
         },
+        onUpdate: 'cascade',
+        onDelete: 'cascade'
       },
       createdAt: {
         allowNull: false,

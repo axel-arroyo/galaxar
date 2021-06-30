@@ -23,7 +23,7 @@ router.get("/list", async (req, resp) => {
 });
 
 //Crear un grupo
-router.post("/", async (req, resp) => {
+router.post("/create", async (req, resp) => {
   try {
     const group = await Group.create(req.body);
     return resp.send(group);
@@ -42,10 +42,25 @@ router.post("/add", async (req, resp) => {
     });
     const group = await Group.findOne({
       where: {
-        name: req.body.name,
+        name: req.body.group,
       },
     });
     user.addGroup(group);
+    return resp.send("success");
+  } catch (error) {
+    resp.status(400).send(error);
+  }
+});
+
+// Eliminar grupo (cascada)
+router.post("/delete", async (req, resp) => {
+  try {
+    const group = await Group.findOne({
+      where: {
+        name: req.body.group,
+      },
+    });
+    await group.destroy();
     return resp.send("success");
   } catch (error) {
     resp.status(400).send(error);
